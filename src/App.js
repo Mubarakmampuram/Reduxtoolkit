@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import "./App.css";
+import Header from "./components/Header";
+import MyTabs from "./components/MyTabs";
+import { getDishes } from "./redux/cart";
+//import { useEffect, useState } from "react";
+//import Data from "./store/DataContext";
 
 function App() {
+  const dispatch = useDispatch();
+  const dishes = useSelector((state) => state.cart.dishes);
+  console.log(dishes);
+  useEffect(() => {
+    dispatch(getDishes());
+  }, [dispatch]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header data={dishes} />
+      <MyTabs data={dishes} />
     </div>
   );
 }
