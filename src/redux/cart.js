@@ -59,6 +59,7 @@ export const cartSlice = createSlice({
       console.log("loading");
     });
     builder.addCase(getDishes.fulfilled, (state, action) => {
+      console.log("fetched  successfully");
       state.dishes = [...action.payload];
     });
     builder.addCase(getDishes.rejected, (state, action) => {
